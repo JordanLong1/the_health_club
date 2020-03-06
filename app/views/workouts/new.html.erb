@@ -1,1 +1,14 @@
 <h1>Insert the form to create a new instance of your model.</h1>
+
+
+<form method="POST" action='/workouts'>
+    <label>Name:</label>
+        <input type="text" name="name" placeholder="Enter name of workout:"><br>
+    <label>Type of workout(upper body, lower body, back, chest etc.)</label>
+        <input type="text" name="muscle_group" placeholder="Type of workout?"><br>
+    <label>Lenght of workout:</label>
+        <input type="text" name="duration" placeholder="How long?"><br>
+    <label>Amount of calories burned:</label>
+        <input type="text" name="calories_burned" placeholder="Feel the burn!"><br>
+<input type="submit" value="Submit information!">
+</form>
