@@ -1,1 +1,16 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<h1>The list below is a list of your workout statistics!</h1>
+<p>If you see an error, please visit the edit link at the bottom of the page.</p>
+
+<h2>Type of workout:</h2>
+<%=@workout.name%><br>
+<h2>Body parts worked:</h2>
+<%=@workout.muscle_group%><br>
+<h2>Length of workout:</h2>
+<%=@workout.duration%><br>
+<h2>Amount of calories burnt!</h2>
+<%=@workout.calories_burned%><br>
+
+<% if current_user == @workout.user%>
+<h4>Oops! I made an error.</h4><br>
+<a href="/workouts/<%=@workout.id%>/edit">Edit workout:</a>
+<%end%>
