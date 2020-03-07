@@ -8,19 +8,24 @@ class WorkoutsController < ApplicationController
 
   # GET: /workouts/new
   get "/workouts/new" do
+    if logged_in?
     erb :"/workouts/new.html"
+    else  
+      redirect to '/'
+    end
   end
 
   # POST: /workouts
   post "/workouts" do
     workout = Workout.create(params)
+    workout.user_id = current_user
     redirect "/workouts/#{workout.id}"
   end
 
   # GET: /workouts/5
   get "/workouts/:id" do
-    @workout = Workout.find(params[:id])
-    if current_user == @workout.user
+    if logged_in?
+      @workout = Workout.find(params[:id])
     erb :"/workouts/show.html"
     else  
       redirect to '/'
@@ -29,8 +34,8 @@ class WorkoutsController < ApplicationController
 
   # GET: /workouts/5/edit
   get "/workouts/:id/edit" do
-    if logged_in?
     @workout = Workout.find(params[:id])
+    if current_user == @workout.user
     erb :"/workouts/edit.html"
     else
    redirect to '/'
@@ -40,10 +45,14 @@ class WorkoutsController < ApplicationController
   # PATCH: /workouts/5
   patch "/workouts/:id" do
     #find the workout dynamically aka by id
-    @workout = Workout.find(params[:id])
-    @workout.update(params[:id])
+    if logged_in?
+       @workout = Workout.find(params[:id])
+       @workout.update(params[:id])
+       erb :"/workouts/edit.html"
     #update it via .update
-    redirect "/workouts/#{@workout.id}"
+      else
+      redirect "/workouts/#{@workout.id}"
+    end
   end
 
   # DELETE: /workouts/5/delete
