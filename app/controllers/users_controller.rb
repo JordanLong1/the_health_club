@@ -2,7 +2,11 @@ class UsersController < ApplicationController
 
   # GET: /users
   get "/users" do
+    if logged_in?
     erb :"/users/index.html"
+    else  
+      redirect to '/'
+    end
   end
   
   post '/login' do 
@@ -44,9 +48,12 @@ class UsersController < ApplicationController
 
   # GET: /users/5
   get "/users/:id" do
+    if logged_in?
     @user = User.find(params[:id])
-  
     erb :"/users/show.html"
+    else  
+      redirect to '/'
+    end
   end
 
 
