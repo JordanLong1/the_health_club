@@ -1,1 +1,11 @@
 <h1>This is the Model's index page.</h1>
+
+<% @new_workout.each do |workout| %><br>
+<%=workout.name%><br>
+<%=workout.muscle_group%><br>
+<%=workout.duration%><br>
+<%=workout.calories_burned%><br>
+<% end %>
+
+
+<%# helpers logged in%>
