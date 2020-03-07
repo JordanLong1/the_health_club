@@ -1,3 +1,10 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<h1>Welcome, <%=@user.name%>! </h1>
+<p>Below is a link to add a new workout. Click to get going!</p>
 
-<%= @user.name %> 
+<%=@user.name%>
+
+<%# links to add a workout, edit, delete etc.%>
+<label>to add a new workout, click here:</label>
+<a href="/workouts/new">Add workout:</a><br>
+
+ 
