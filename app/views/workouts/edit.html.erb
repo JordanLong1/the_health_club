@@ -1,1 +1,14 @@
 <h1>Insert the form to edit an instance of your model here.</h1>
+
+<form action="/workouts/<%=@workout.id%>" method="POST">
+    <input id="hidden" type="hidden" name="_method" value="PATCH">
+    <label>Edit name of workout:</label>
+    <input id="name" type="text" name="workout[name]" value=<%= @workout.name%>><br>
+    <label>Edit the muscle group worked:</label>
+    <input id="muscle_group" type="text" name="workout[muscle_group]" value=<%= @workout.muscle_group%>><br>
+    <label>Edit the length of the workout:</label>
+    <input id="duration" type="text" name="workout[duration]" value=<%= @workout.duration%>><br>
+    <label>Edit the amount of calories burned:</label>
+    <input id="calories_burned" type="text" name="workout[calories_burned]" value=<%= @workout.calories_burned%>> <br>
+    <input type="submit">
+</form>
