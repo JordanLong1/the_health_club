@@ -10,7 +10,8 @@
 <h2>Amount of calories burnt!</h2>
 <%=@workout.calories_burned%><br>
 
-<% if current_user == @workout.user%>
+<%#if logged_in?%>
 <h4>Oops! I made an error.</h4><br>
-<a href="/workouts/<%=@workout.id%>/edit">Edit workout:</a>
-<%end%>
+<a href="/workouts/<%=@workout.user_id%>/edit">Edit workout:</a><br>
+
+<%#$end%>
