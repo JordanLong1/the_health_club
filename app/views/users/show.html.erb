@@ -1,10 +1,20 @@
 <h1>Welcome, <%=@user.name%>! </h1>
-<p>Below is a link to add a new workout. Click to get going!</p>
+<p>Below are some links to add or view certain things, click the one you need to use!</p>
 
 <%=@user.name%>
 
 <%# links to add a workout, edit, delete etc.%>
+<%if @user.id == current_user.id%>
 <label>to add a new workout, click here:</label>
-<a href="/workouts/new">Add workout:</a><br>
+<a href="/workouts/new"><button>Add Workout!</button></a><br>
+<%end%>
+
+<label>To delete your account, click here.</label><br>
+<% if @user.id == current_user.id%>
+<form action="/users/<%= @user.id %>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="delete">
+  <%end%>
+</form><br>
 
  
