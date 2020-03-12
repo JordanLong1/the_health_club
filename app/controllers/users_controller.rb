@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     end
   end
   
-  post '/login' do 
+  post '/login' do
     user = User.find_by(:username => params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id 
@@ -23,7 +23,9 @@ class UsersController < ApplicationController
   post '/signup' do 
     if params[:name] == "" || params[:email] == "" || params[:username] == "" || params[:password] == ""
       redirect to '/'
-      else
+    elsif user = User.find_by(:username => params[:username])
+      redirect to '/'
+    else
     user = User.create(params)
     session[:user_id] = user.id
     redirect to "/users/#{user.id}"
@@ -53,6 +55,39 @@ class UsersController < ApplicationController
     erb :"/users/show.html"
     else  
       redirect to '/'
+    end
+  end
+
+  get "/users/:id/edit" do 
+    if !logged_in?
+      redirect to '/'
+    else 
+      @user = User.find(params[:id])
+      erb :"/users/edit.html"
+    end
+  end
+
+  patch "/users/:id" do 
+      @user = User.find(params[:id])
+      if logged_in? && @user.id == current_user.id 
+        @user.update(params[:user])
+        redirect to "/users/#{@user.id}"
+      else
+        redirect to '/'
+      end
+  end
+
+  delete "/users/:id" do 
+    if logged_in? 
+      @User = User.find_by_id(params[:id])
+      if @user && @user.id == current_user.user_id 
+        @user.delete 
+        session.clear
+        #make users view!
+        redirect to '/users'
+      else 
+        redirect to '/'
+      end
     end
   end
 
