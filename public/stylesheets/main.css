@@ -13,6 +13,8 @@
 
   /* --- Welcome Page Styles --- */
   body {
+    background-image: url(https://www.safespaceco.com/wp-content/uploads/2019/08/Empty-Gym-with-Weight-Lifting-Equipment.jpg);
+    /* background-attachment: fixed; */
     background-color: lightblue;
     color: #333;
     font-family: Sans-Serif;
