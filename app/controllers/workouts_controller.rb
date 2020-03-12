@@ -2,8 +2,12 @@ class WorkoutsController < ApplicationController
 
   # GET: /workouts
   get "/workouts" do
-    @new_workout = Workout.all
+    if logged_in?
+    @workouts = Workout.all
     erb :"/workouts/index.html"
+    else  
+      redirect to '/'
+    end
   end
 
   # GET: /workouts/new
@@ -17,46 +21,62 @@ class WorkoutsController < ApplicationController
 
   # POST: /workouts
   post "/workouts" do
-    workout = Workout.create(params)
-    workout.user_id = current_user
-    redirect "/workouts/#{workout.id}"
+    #if params = ""
+    #redirect to add screen 
+    if params[:name] == "" || params[:muscle_group] == "" || params[:duration] == "" || params[:calories_burned] == ""
+      redirect to '/workouts/new'
+    end 
+      if logged_in?
+        workout = Workout.create(params)
+        workout.user_id = current_user.id
+        workout.save
+        redirect "/workouts/#{workout.id}"
+    end
   end
 
   # GET: /workouts/5
   get "/workouts/:id" do
-    if logged_in?
-      @workout = Workout.find(params[:id])
+    if @workout = Workout.find_by(:id => params[:id])
     erb :"/workouts/show.html"
     else  
       redirect to '/'
     end
+    
   end
 
   # GET: /workouts/5/edit
   get "/workouts/:id/edit" do
+    if logged_in?
     @workout = Workout.find(params[:id])
-    if current_user == @workout.user
     erb :"/workouts/edit.html"
     else
+      #change this redirect 
    redirect to '/'
     end
   end
 
   # PATCH: /workouts/5
   patch "/workouts/:id" do
-    #find the workout dynamically aka by id
-    if logged_in?
-       @workout = Workout.find(params[:id])
-       @workout.update(params[:id])
-       erb :"/workouts/edit.html"
-    #update it via .update
+    @workout = Workout.find(params[:id])
+    if logged_in? && @workout.user_id == current_user.id
+       @workout.update(params[:workout])
+       redirect "/workouts/#{@workout.id}"
       else
-      redirect "/workouts/#{@workout.id}"
+      redirect "/workouts/new"
     end
   end
 
-  # DELETE: /workouts/5/delete
-  delete "/workouts/:id/delete" do
-    redirect "/workouts"
+  
+  delete "/workouts/:id" do
+    if logged_in?
+      @workout = Workout.find_by_id(params[:id])  
+    if @workout && @workout.user_id == current_user.id
+      @workout.delete
+    redirect to '/workouts'
+    end
+    else
+      redirect to '/'
+      # redirect to '/workouts/new'
+    end
   end
 end
