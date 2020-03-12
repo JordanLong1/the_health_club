@@ -14,12 +14,15 @@
     <link rel="stylesheet" href="/stylesheets/main.css" />
   </head>
   <header>
+  <%if logged_in?%>
   <form action='/logout' method='get'>
   <input type="submit" value="Log Out">
+  <%end%>
   </form>
   </header>
   <body>
     <div class="wrapper">
+    <body backround="https://www.safespaceco.com/wp-content/uploads/2019/08/Empty-Gym-with-Weight-Lifting-Equipment.jpg"></body>
 
         <%= yield %>
 
