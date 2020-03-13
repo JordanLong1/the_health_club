@@ -11,16 +11,19 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="/stylesheets/main.css" />
+    <link rel="stylesheet" href="/stylesheets/new.css" />
   </head>
+  <body>
   <header>
   <%if logged_in?%>
-  <form action='/logout' method='get'>
-  <input type="submit" value="Log Out">
-  <%end%>
-  </form>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/users/<%= current_user.id %>">My Account</a></li>
+    <li><a href="/workouts">View All Workouts</a></li>
+    <li><a href="/logout">Log Out</a></li>
+</ul>
+<%end%>
   </header>
-  <body>
     <div class="wrapper">
     <body backround="https://www.safespaceco.com/wp-content/uploads/2019/08/Empty-Gym-with-Weight-Lifting-Equipment.jpg"></body>
 
