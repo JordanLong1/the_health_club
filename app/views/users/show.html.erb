@@ -9,6 +9,8 @@
 <a href="/workouts/new"><button>Add Workout!</button></a><br>
 <label>To view all workouts, click here:</label>
 <a href="/workouts"><button>Workout Library:</button></a><br>
+<label>To edit your user information, click here:</label>
+<a href="/users/<%=@user.id%>/edit"><button>Edit User:</button></a><br>
 <label>To delete your account, click the delete button below.</label>
 <form action="/users/<%= @user.id %>" method="post">
   <input id="hidden" type="hidden" name="_method" value="delete">
