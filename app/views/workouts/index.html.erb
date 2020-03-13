@@ -1,18 +1,16 @@
 <h1>Here is a list of all of the workouts.</h1>
 <% @workouts.each.with_index(1) do |workout, index| %><br>
 <strong>  <%=index%> - <label>Workout Information!</label></strong>
-<a href="/workouts/<%= workout.id%>"><%= workout.name%></a>
-<ul>
-    <li><%=workout.name%></li>
-    <li><%=workout.muscle_group%></li>
-    <li><%=workout.duration%></li>
-    <li><%=workout.calories_burned%></li>
-</ul>
+<button style="width:175px; margin:10px; padding:5px; border-color:black; border-radius: 15px;" onclick="window.location.href ='/workouts/<%= workout.id%>';">View This Workout:</button><br>
+    <%=workout.name%><br>
+    <%=workout.muscle_group%><br>
+    <%=workout.duration%><br>
+    <%=workout.calories_burned%><br>
     <%if workout.user_id == current_user.id%>
-        <a href="/workouts/<%workout.id%>/edit">Edit:</a>
+     <form action="/workouts/<%= workout.id %>" method="post">
+          <input id="hidden" type="hidden" name="_method" value="delete">
         <button style="width:175px; margin:10px; padding:5px; border-color:black; border-radius: 15px;" onclick="window.location.href ='/workouts/<%=workout.id%>/edit';">Edit Workout</button>
-         <a href="/workouts/<%workout.id%>/delete">Delete:</a>
-         <button style="width:175px; margin:10px; padding:5px; border-color:black; border-radius: 15px;" onclick="window.location.href ='/workouts/<%=workout.id%>/delete';">Delete Workout</button>
+         <button style="width:175px; margin:10px; padding:5px; border-color:black; border-radius: 15px;" onclick="window.location.href ='/workouts/<%=workout.id%>';">Delete Workout</button>
     <%end%>
 <% end %><br>
 
