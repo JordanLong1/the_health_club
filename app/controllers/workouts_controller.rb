@@ -21,9 +21,7 @@ class WorkoutsController < ApplicationController
 
   # POST: /workouts
   post "/workouts" do
-    #if params = ""
-    #redirect to add screen 
-    if params[:name] == "" || params[:muscle_group] == "" || params[:duration] == "" || params[:calories_burned] == ""
+    if params[:name].empty? || params[:muscle_group].empty? || params[:duration].empty? || params[:calories_burned].empty?
       redirect to '/workouts/new'
     end 
       if logged_in?
@@ -69,10 +67,10 @@ class WorkoutsController < ApplicationController
   
   delete "/workouts/:id" do
     if logged_in?
-      @workout = Workout.find_by_id(params[:id])  
-    if @workout && @workout.user_id == current_user.id
-      @workout.delete
-    redirect to '/workouts'
+      @workout = Workout.find_by(:id => params[:id]) 
+      if @workout.user == current_user
+      @workout.destroy
+    redirect to "/users/#{current_user.id}"
     end
     else
       redirect to '/'
