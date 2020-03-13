@@ -7,14 +7,13 @@
 <%if @user.id == current_user.id%>
 <label>to add a new workout, click here:</label>
 <a href="/workouts/new"><button>Add Workout!</button></a><br>
-<%end%>
-
-<label>To delete your account, click here.</label><br>
-<% if @user.id == current_user.id%>
+<label>To view all workouts, click here:</label>
+<a href="/workouts"><button>Workout Library:</button></a><br>
+<label>To delete your account, click the delete button below.</label>
 <form action="/users/<%= @user.id %>" method="post">
   <input id="hidden" type="hidden" name="_method" value="delete">
   <input type="submit" value="delete">
-  <%end%>
-</form><br>
+<%end%>
+
 
  
