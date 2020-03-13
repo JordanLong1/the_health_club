@@ -78,16 +78,16 @@ class UsersController < ApplicationController
   end
 
   delete "/users/:id" do 
-    if logged_in? 
-      @User = User.find_by_id(params[:id])
-      if @user && @user.id == current_user.user_id 
-        @user.delete 
+    if logged_in?
+    @user = User.find(params[:id])
+    if @user == current_user
+        @user.destroy
         session.clear
         #make users view!
-        redirect to '/users'
-      else 
         redirect to '/'
-      end
+    else 
+      redirect to '/'
+    end
     end
   end
 
