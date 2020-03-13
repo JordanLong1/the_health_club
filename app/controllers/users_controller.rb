@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do 
-    if params[:name] == "" || params[:email] == "" || params[:username] == "" || params[:password] == ""
+    if params[:username].empty? || params[:password].empty?
       redirect to '/'
     elsif user = User.find_by(:username => params[:username])
       redirect to '/'
