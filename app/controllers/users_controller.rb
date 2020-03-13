@@ -69,7 +69,7 @@ class UsersController < ApplicationController
 
   patch "/users/:id" do 
       @user = User.find(params[:id])
-      if logged_in? && @user.id == current_user.id 
+      if @user == current_user
         @user.update(params[:user])
         redirect to "/users/#{@user.id}"
       else
