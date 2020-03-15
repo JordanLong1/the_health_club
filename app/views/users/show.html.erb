@@ -3,7 +3,7 @@
 
 <%=@user.name%>
 
-<%# links to add a workout, edit, delete etc.%>
+
 <%if @user.id == current_user.id%>
 <label>to add a new workout, click here:</label>
 <a href="/workouts/new"><button>Add Workout!</button></a><br>
