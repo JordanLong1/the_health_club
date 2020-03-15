@@ -1,10 +1,6 @@
 <h1>The list below is a list of your workout statistics!</h1>
 <p>If you see an error, please visit the edit link.</p>
 
-<% if @workout.user_id == current_user.id%>
-<h4>Oops! I made an error.</h4><br>
-<a href="/workouts/<%=@workout.id%>/edit">Edit workout:</a><br>
-<%end%><br>
 
 <h2>Type of workout:</h2>
 <%=@workout.name%><br>
@@ -15,16 +11,13 @@
 <h2>Amount of calories burnt!</h2>
 <%=@workout.calories_burned%><br>
 
-<label>To delete this workout, click delete.</label><br>
+<label>Please review the options below:</label><br>
 <% if @workout.user_id == current_user.id%>
 <form action="/workouts/<%= @workout.id %>" method="post">
   <input id="hidden" type="hidden" name="_method" value="delete">
-  <input type="submit" value="delete">
-</form><br>
-
-<% if @workout.user_id == current_user.id%>
-<h2>To add a new addition click the link below</h2><br>
-<a href="/workouts/new">New workout:</a><br>
-<%end%><br>
+  <button style="width:175px; margin:10px; padding:5px; border-color:black; border-radius: 15px;" onclick="window.location.href ='/workouts/<%=@workout.id%>';">Delete Workout</button><br>
+  </form><br>
+<button style="width:175px; margin:10px; padding:5px; border-color:black; border-radius: 15px;" onclick="window.location.href ='/workouts/new';">New workout:</button><br>
+<button style="width:175px; margin:10px; padding:5px; border-color:black; border-radius: 15px;" onclick="window.location.href ='/workouts/<%=@workout.id%>/edit';">Edit Workout</button><br>
 
 <%end%>

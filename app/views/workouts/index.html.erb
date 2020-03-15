@@ -9,6 +9,7 @@
     <%if workout.user_id == current_user.id%>
      <form action="/workouts/<%= workout.id %>" method="post">
           <input id="hidden" type="hidden" name="_method" value="delete">
+          </form>
         <button style="width:175px; margin:10px; padding:5px; border-color:black; border-radius: 15px;" onclick="window.location.href ='/workouts/<%=workout.id%>/edit';">Edit Workout</button>
          <button style="width:175px; margin:10px; padding:5px; border-color:black; border-radius: 15px;" onclick="window.location.href ='/workouts/<%=workout.id%>';">Delete Workout</button>
     <%end%>
