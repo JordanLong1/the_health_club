@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  # GET: /users
+ 
   get "/users" do
     if logged_in?
     erb :"/users/index.html"
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET: /users/5
+  
   get "/users/:id" do
     if logged_in?
     @user = User.find(params[:id])
@@ -83,7 +83,6 @@ class UsersController < ApplicationController
     if @user == current_user
         @user.destroy
         session.clear
-        #make users view!
         redirect to '/'
     else 
       redirect to '/'
