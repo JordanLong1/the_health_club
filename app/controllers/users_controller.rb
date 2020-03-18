@@ -1,13 +1,6 @@
 class UsersController < ApplicationController
 
- 
-  get "/users" do
-    if logged_in?
-    erb :"/users/index.html"
-    else  
-      redirect to '/'
-    end
-  end
+
   
   post '/login' do
     user = User.find_by(:username => params[:username])
@@ -51,7 +44,7 @@ class UsersController < ApplicationController
   
   get "/users/:id" do
     if logged_in?
-    @user = User.find(params[:id])
+    @user = User.find_by(:id => params[:id])
     erb :"/users/show.html"
     else  
       redirect to '/'
@@ -59,21 +52,21 @@ class UsersController < ApplicationController
   end
 
   get "/users/:id/edit" do 
-    if !logged_in?
-      redirect to '/'
-    else 
-      @user = User.find(params[:id])
+    if logged_in?
+      @user = User.find_by(:id => params[:id])
       erb :"/users/edit.html"
+    else
+      redirect to '/'
     end
   end
 
   patch "/users/:id" do 
-      @user = User.find(params[:id])
-      if @user == current_user
-        @user.update(params[:user])
+      @user = User.find_by(:id => params[:id])
+      if  logged_in? && @user == current_user
+        @user.update(:name => params[:name], :username => params[:username])
         redirect to "/users/#{@user.id}"
       else
-        redirect to '/'
+        redirect to "/users/#{@user.id}/edit"
       end
   end
 
