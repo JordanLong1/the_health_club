@@ -1,12 +1,13 @@
 <h1>If you made a mistake on login info, fix it here!</h1><br>
 
 
-<form action="/users/<%=@user.id%>" method="POST">
-    <input id="hidden" type="hidden" name="_method" value="PATCH">
+<form action="/users/<%= @user.id %>" method="POST">
+    <input id="hidden" type="hidden" name="_method" value="patch">
     <label>Edit your name:</label>
-    <input id="name" type="text" name="user[name]" value=<%= @user.name%>><br>
+        <input type="text" name="name" value=<%= @user.name%>><br>
     <label>Edit your username:</label>
-    <input id="username" type="text" name="user[username]" value=<%= @user.username%>><br>
-    <input type="submit">
+        <input type="text" name="username" value=<%= @user.username%>><br>
+    <input type="submit" value="Update Account">
 </form>
+
 
